@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Seat Allocation Results</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            background-color: #f9f9f9;
+            padding: 20px;
+            margin: 0;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            color: #333;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        h2 {
+            color: #555;
+            margin-top: 30px;
+            margin-bottom: 10px;
+        }
+        ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+        li {
+            margin-bottom: 10px;
+        }
+        a {
+            display: inline-block;
+            margin-top: 20px;
+            text-decoration: none;
+            color: #007bff;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Seat Allocation Results</h1>
+        <p>Total Seats: {{ total_seats }}</p>
+        
+        <!-- <section>
+            <h2>Vertical Reservation</h2>
+            {{vertical_seats}}
+            <ul>
+                {% for category, seats in vertical_seats.items %}
+                    <li>{{ category }}: {{ seats }}</li>
+                {% endfor %}
+                <li>General Seats: {{ general_seats }}</li>
+            </ul>
+        </section> -->
+        
+        <section>
+            <h2>Horizontal Reservation</h2>
+            <ul>
+                {% for vert_category, horiz_categories in allocation.items %}
+                    <li>
+                        <strong>{{ vert_category }}</strong>
+                        <ul>
+                            {% for horiz_category, seats in horiz_categories.items %}
+                                <li>{{ horiz_category }}: {{ seats }}</li>
+                            {% endfor %}
+                        </ul>
+                    </li>
+                {% endfor %}
+            </ul>
+        </section>
+        <a href="{% url 'allocate_seats' %}">Back to form</a>
+    </div>
+</body>
+</html>
